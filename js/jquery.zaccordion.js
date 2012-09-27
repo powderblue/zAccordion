@@ -1,6 +1,6 @@
 ﻿/*
-	jQuery zAccordion Plugin v2.0.0
-	Copyright (c) 2010 - 2011 Nate Armagost, http://www.armagost.com/zaccordion
+	jQuery zAccordion Plugin v2.1.0
+	Copyright (c) 2010 - 2012 Nate Armagost, http://www.armagost.com/zaccordion
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -24,11 +24,12 @@
 			invert: false, /* Whether or not to invert the slideshow, so the last slide stays in the same position, rather than the first slide. */
 			animationStart: function () {}, /* Function called when animation starts. */
 			animationComplete: function () {}, /* Function called when animation completes. */
-			afterBuild: function () {} /* Function called after the accordion is finished building. */
+			buildComplete: function () {}, /* Function called after the accordion is finished building. */
+			errors: false /* Display zAccordion specific errors. */
 		}, helpers = {
-			displayError: function (e) {
-				if (window.console) {
-					console.log("zAccordion: " + e + ".");
+			displayError: function (msg, e) {
+				if (window.console && e) {
+					console.log("zAccordion: " + msg + ".");
 				}
 			},
 			findChildElements: function (t) { /* Function to find the number of child elements. */
@@ -74,13 +75,13 @@
 			sizeAccordion: function (t, o) { /* Calculate the sizes of the tabs and slides */
 				if ((o.width === undefined) && (o.slideWidth === undefined) && (o.tabWidth === undefined)) {
 					/* Nothing is defined. */
-					helpers.displayError("width must be defined");
+					helpers.displayError("width must be defined", o.errors);
 					return false;
 				} else if ((o.width !== undefined) && (o.slideWidth === undefined) && (o.tabWidth === undefined)) {
 					/* Only width is defined. */
 					/* Check for errors. */
 					if ((o.width > 100) && (o.widthUnits === "%")) { /* Check for a width percentage of over 100. */
-						helpers.displayError("width cannot be over 100%");
+						helpers.displayError("width cannot be over 100%", o.errors);
 						return false;
 					} else {
 						o.slideWidthUnits = o.widthUnits;
@@ -96,23 +97,23 @@
 					}
 				} else if ((o.width === undefined) && (o.slideWidth !== undefined) && (o.tabWidth === undefined)) {
 					/* Only slideWidth is defined. */
-					helpers.displayError("width must be defined");
+					helpers.displayError("width must be defined", o.errors);
 					return false;
 				} else if ((o.width === undefined) && (o.slideWidth === undefined) && (o.tabWidth !== undefined)) {
 					/* Only tabWidth is defined. */
-					helpers.displayError("width must be defined");
+					helpers.displayError("width must be defined", o.errors);
 					return false;
 				} else if ((o.width !== undefined) && (o.slideWidth === undefined) && (o.tabWidth !== undefined)) {
 					/* width and tabWidth defined. */
 					/* Check for errors */
 					if (o.widthUnits !== o.tabWidthUnits) {
-						helpers.displayError("Units do not match");
+						helpers.displayError("Units do not match", o.errors);
 						return false;
 					} else if ((o.width > 100) && (o.widthUnits === "%")) {
-						helpers.displayError("width cannot be over 100%");
+						helpers.displayError("width cannot be over 100%", o.errors);
 						return false;
 					} else if ((((t.children().size() * o.tabWidth) > 100) && (o.widthUnits === "%")) || (((t.children().size() * o.tabWidth) > o.width) && (o.widthUnits === "px"))) {
-						helpers.displayError("tabWidth too large for accordion");
+						helpers.displayError("tabWidth too large for accordion", o.errors);
 						return false;
 					} else {
 						/* Need to define the remaining slideWidth */
@@ -128,16 +129,16 @@
 					/* width and slideWidth defined. */
 					/* Check for errors. */
 					if (o.widthUnits !== o.slideWidthUnits) {
-						helpers.displayError("Units do not match");
+						helpers.displayError("Units do not match", o.errors);
 						return false;
 					} else if ((o.width > 100) && (o.widthUnits === "%")) {
-						helpers.displayError("width cannot be over 100%");
+						helpers.displayError("width cannot be over 100%", o.errors);
 						return false;
 					} else if (o.slideWidth >= o.width) {
-						helpers.displayError("slideWidth cannot be greater than or equal to width");
+						helpers.displayError("slideWidth cannot be greater than or equal to width", o.errors);
 						return false;
 					} else if ((((t.children().size() * o.slideWidth) < 100) && (o.widthUnits === "%")) || (((t.children().size() * o.slideWidth) < o.width) && (o.widthUnits === "px"))) { /* Prevents gaps in the accordion. For example, a slider with 4 slides at 150 pixels wide. 4 * 150 = 600. Needs to fill an 800px space. */
-						helpers.displayError("slideWidth too small for accordion");
+						helpers.displayError("slideWidth too small for accordion", o.errors);
 						return false;
 					} else {
 						/* Need to define the remaining tabWidth. */
@@ -151,11 +152,11 @@
 					}
 				} else if ((o.width === undefined) && (o.slideWidth !== undefined) && (o.tabWidth !== undefined)) {
 					/* slideWidth and tabWidth defined. */
-					helpers.displayError("width must be defined");
+					helpers.displayError("width must be defined", o.errors);
 					return false;
 				} else if ((o.width !== undefined) && (o.slideWidth !== undefined) && (o.tabWidth !== undefined)) {
 					/* width, slideWidth, and tabWidth defined. */
-					helpers.displayError("At maximum two of three attributes (width, slideWidth, and tabWidth) should be defined");
+					helpers.displayError("At maximum two of three attributes (width, slideWidth, and tabWidth) should be defined", o.errors);
 					return false;
 				}
 			},
@@ -183,7 +184,7 @@
 			}
 		}, methods = {
 			init: function (options) {
-				var f, fixattr = ["slideWidth", "tabWidth", "startingSlide", "slideClass", "animationStart", "animationComplete", "afterBuild"];
+				var f, fixattr = ["slideWidth", "tabWidth", "startingSlide", "slideClass", "animationStart", "animationComplete", "buildComplete"];
 				for (f = 0; f < fixattr.length; f += 1) {
 					if ($(this).data(fixattr[f].toLowerCase()) !== undefined) {
 						$(this).data(fixattr[f], $(this).data(fixattr[f].toLowerCase()));
@@ -194,16 +195,16 @@
 				options = $.extend(defaults, options, $(this).data());
 				/* Check for a height */
 				if (this.length <= 0) {
-					helpers.displayError("selector does not exist");
+					helpers.displayError("Selector does not exist", options.errors);
 					return false;
 				} else if (!helpers.fixHeight(options)) {
-					helpers.displayError("height must be defined");
+					helpers.displayError("height must be defined", options.errors);
 					return false;
 				} else if (!helpers.findChildElements(this)) {
-					helpers.displayError("No child elements available");
+					helpers.displayError("No child elements available", options.errors);
 					return false;
 				} else if (options.speed > options.timeout) {
-					helpers.displayError("Speed cannot be greater than timeout");
+					helpers.displayError("Speed cannot be greater than timeout", options.errors);
 					return false;
 				} else {
 					/* Get the correct units */
@@ -267,6 +268,11 @@
 									"width": o.slideWidth + o.widthUnits,
 									"height": o.height + o.heightUnits
 								});
+								if (childtag === "LI") {
+									$(this).css({
+										"text-indent": 0
+									});
+								}
 								if (o.invert) {
 									$(this).css({ "right": xpos + o.widthUnits, "float": "right" });
 								} else {
@@ -394,7 +400,7 @@
 							if (obj.data("auto")) {
 								helpers.timer(obj);
 							}
-							o.afterBuild();
+							o.buildComplete();
 						});
 					}
 				}
@@ -439,6 +445,16 @@
 					$(this).children().removeClass(prefix + "-previous");
 				}
 				$(this).removeData();
+				if (o !== undefined) {
+					if (o.destroyComplete !== "undefined") {
+						if (typeof(o.destroyComplete.afterDestroy) !== "undefined") {
+							o.destroyComplete.afterDestroy();
+						}
+						if (o.destroyComplete.rebuild) {
+							return methods.init.apply(this, [o.destroyComplete.rebuild]);
+						}
+					}
+				}
 			}
 		};
 		if (methods[method]) {
