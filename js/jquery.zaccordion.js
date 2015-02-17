@@ -419,6 +419,7 @@
 				}
 			},
 			trigger: function (x) {
+				x = parseInt(x, 10);
 				if ((x >= $(this).children().size()) || (x < 0)) { /* If the triggered slide is out of range, trigger the first slide. */
 					x = 0;
 				}
