@@ -354,7 +354,7 @@ $(document).ready(function() {
 			<p id="animation"><span></span></p>
 			<p>This example shows how to fire an event when slide animation starts and when it is complete. The <strong>timeout</strong> is increased to 8 seconds in the snippet below in order to see the how the <strong>animationStart</strong> and <strong>animationComplete</strong> options work.</p>
 <pre class="js">
-$(document).ready(function() {
+$(document).ready(function () {
 	$("#example9").zAccordion({
 		timeout: 8000,
 		speed: 5000,
@@ -362,9 +362,11 @@ $(document).ready(function() {
 		width: "100%",
 		height: "150",
 		animationStart: function () {
+			console.log('In `animationStart()`, `this` =', "\n", this);
 			$("#animation span").html("Animation started...");
 		},
 		animationComplete: function () {
+			console.log('In `animationComplete()`, `this` =', "\n", this);
 			$("#animation span").html("Animation complete.");
 		}
 	});
@@ -471,12 +473,13 @@ $(document).ready(function() {
 			<p id="build"><span></span></p>
 			<p>The <strong>afterBuild</strong> option can be set up to fire a function once the accordion is built. Below, the <strong>afterBuild</strong> option will change the text of an <em>id</em>. As a practical example, this option could be used to set the accordion's CSS position from off screen to on screen, hiding the initial build and showing the accordion only when it is ready.</p>
 <pre class="js">
-$(document).ready(function() {
+$(document).ready(function () {
 	$("#example12").zAccordion({
 		height: "150",
 		slideWidth: "700",
 		width: "960",
 		buildComplete: function () {
+			console.log('In `buildComplete()`, `this` =', "\n", this);
 			$("#build span").html("Build complete.");
 		}
 	});
