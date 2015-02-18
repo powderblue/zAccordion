@@ -361,13 +361,15 @@ $(document).ready(function () {
 		tabWidth: "10%",
 		width: "100%",
 		height: "150",
-		animationStart: function () {
-			console.log('In `animationStart()`, `this` =', "\n", this);
+		animationStart: function (animated) {
 			$("#animation span").html("Animation started...");
+			console.log('In `animationStart()`, `this` =', "\n", this);
+			console.log('In `animationStart()`, `animated` =', "\n", animated);
 		},
-		animationComplete: function () {
-			console.log('In `animationComplete()`, `this` =', "\n", this);
+		animationComplete: function (animated) {
 			$("#animation span").html("Animation complete.");
+			console.log('In `animationComplete()`, `this` =', "\n", this);
+			console.log('In `animationComplete()`, `animated` =', "\n", animated);
 		}
 	});
 });

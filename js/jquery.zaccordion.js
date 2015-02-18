@@ -1,4 +1,5 @@
 /*globals window, jQuery*/
+/*jslint white: true */
 /*
 	jQuery zAccordion Plugin v2.1.0
 	Copyright (c) 2010 - 2012 Nate Armagost, http://www.armagost.com/zaccordion
@@ -334,70 +335,77 @@
 							});
 							/* Set up the listener to change slides when triggered. */
 							obj.children().bind(o.trigger, function () {
+								var triggeredEl = $(this),
+									i,
+									j,
+									p,  /* 1-index */
+									c,  /* 1-index */
+									animateProperties,
+									finalXPosition;
 								/* Don't do anything if the slide is already open. */
-								if ($(this).index() !== obj.data("current")) {
-									var i, j, p, c, animateProperties, finalXPosition; /* p and c are 1-indexes */
-									p = previous + 1; /* Using the 1-index for nth selector. */
-									c = obj.data("current") + 1; /* Using the 1-index for nth selector. */
-									if ((p !== 0) && (o.slideClass !== null)) {
-										obj.children(childtag + ":nth-child(" + p + ")").removeClass(o.slidePreviousClass); /* Remove class for previous slide if previous slide exists. */
-									}
-									obj.children(childtag + ":nth-child(" + c + ")");
-									if (o.slideClass !== null) {
-										obj.children(childtag + ":nth-child(" + c + ")").addClass(o.slidePreviousClass);
-									}
-									previous = obj.data("current");
-									obj.data("previous", obj.data("current"));
-									p = previous;
-									p += 1;
-									obj.data("current", $(this).index());
-									c = obj.data("current");
-									c += 1;
-									obj.children().css("cursor", "pointer");
-									$(this).css("cursor", "default"); /* Add the open class to the slide tab that was just triggered */
-									if (o.slideClass !== null) {
-										obj.children().addClass(o.slideClosedClass).removeClass(o.slideOpenClass);
-										$(this).addClass(o.slideOpenClass).removeClass(o.slideClosedClass); /* Add the open class to the slide tab that was just triggered */
-									}
-									obj.data("next", helpers.getNext(size, $(this).index()));
-									/* If the slide is not open... */
-									helpers.timer(obj);
-									o.animationStart.call(obj.get(0));
-									finalXPosition = originals[obj.data("current")] + o.widthUnits;
-									animateProperties = o.invert ? {right: finalXPosition} : {left: finalXPosition};
-									obj.children(childtag + ":nth-child(" + c + ")")
-										.stop()
-										.animate(animateProperties, o.speed, o.easing, function () {
-											o.animationComplete.call(obj.get(0));
-										});
-									/* Closing other slides. */
-									for (i = 0; i < size; i += 1) {
-										j = i + 1;
-										if (i < obj.data("current")) {
-											if (o.invert) {
-												obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
-													right: o.width - (j * o.tabWidth) + o.widthUnits
-												}, o.speed, o.easing);
-											} else {
-												obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
-													left: originals[i] + o.widthUnits
-												}, o.speed, o.easing);
-											}
-										}
-										if (i > obj.data("current")) {
-											if (o.invert) {
-												obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
-													right: (size - j) * o.tabWidth + o.widthUnits
-												}, o.speed, o.easing);
-											} else {
-												obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
-													left: originals[i] + animate + o.widthUnits
-												}, o.speed, o.easing);
-											}
-										}
-									}
-									return false; /* This is important. If a visible link is clicked within the slide, it will open the slide instead of redirecting the link. */
+								if (triggeredEl.index() === obj.data("current")) {
+									return;
 								}
+								p = previous + 1; /* Using the 1-index for nth selector. */
+								c = obj.data("current") + 1; /* Using the 1-index for nth selector. */
+								if ((p !== 0) && (o.slideClass !== null)) {
+									obj.children(childtag + ":nth-child(" + p + ")").removeClass(o.slidePreviousClass); /* Remove class for previous slide if previous slide exists. */
+								}
+								obj.children(childtag + ":nth-child(" + c + ")");
+								if (o.slideClass !== null) {
+									obj.children(childtag + ":nth-child(" + c + ")").addClass(o.slidePreviousClass);
+								}
+								previous = obj.data("current");
+								obj.data("previous", obj.data("current"));
+								p = previous;
+								p += 1;
+								obj.data("current", triggeredEl.index());
+								c = obj.data("current");
+								c += 1;
+								obj.children().css("cursor", "pointer");
+								triggeredEl.css("cursor", "default");
+								if (o.slideClass !== null) {
+									obj.children().addClass(o.slideClosedClass).removeClass(o.slideOpenClass);
+									triggeredEl.addClass(o.slideOpenClass).removeClass(o.slideClosedClass);
+								}
+								obj.data("next", helpers.getNext(size, triggeredEl.index()));
+								/* If the slide is not open... */
+								helpers.timer(obj);
+								o.animationStart.call(obj.get(0), triggeredEl.get(0));
+								finalXPosition = originals[obj.data("current")] + o.widthUnits;
+								animateProperties = o.invert ? {right: finalXPosition} : {left: finalXPosition};
+								obj.children(childtag + ":nth-child(" + c + ")")
+									.stop()
+									.animate(animateProperties, o.speed, o.easing, function () {
+										o.animationComplete.call(obj.get(0), this);
+									});
+								/* Closing other slides. */
+								for (i = 0; i < size; i += 1) {
+									j = i + 1;
+									if (i < obj.data("current")) {
+										if (o.invert) {
+											obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
+												right: o.width - (j * o.tabWidth) + o.widthUnits
+											}, o.speed, o.easing);
+										} else {
+											obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
+												left: originals[i] + o.widthUnits
+											}, o.speed, o.easing);
+										}
+									}
+									if (i > obj.data("current")) {
+										if (o.invert) {
+											obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
+												right: (size - j) * o.tabWidth + o.widthUnits
+											}, o.speed, o.easing);
+										} else {
+											obj.children(childtag + ":nth-child(" + j + ")").stop().animate({
+												left: originals[i] + animate + o.widthUnits
+											}, o.speed, o.easing);
+										}
+									}
+								}
+								return false; /* This is important. If a visible link is clicked within the slide, it will open the slide instead of redirecting the link. */
 							});
 							/* Set up the original timer. */
 							if (obj.data("auto")) {
