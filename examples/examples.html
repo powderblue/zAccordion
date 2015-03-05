@@ -5,23 +5,8 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-		<script src="js/jquery.zaccordion.js"></script>
-		<style type="text/css">
-			/* Just some styles to set the page layout. */
-			* {margin:0;padding:0;font-family:Arial, Verdana, sans-serif;}
-			body {padding:20px;line-height:20px;font-size:12px;color:#000;}
-			h1 {font-size:18px;margin:10px 0;line-height:1;}
-			h2 {font-size:14px;margin:10px 0;line-height:1;}
-			p {font-size:12px;margin:10px 0;}
-			small {font-size:11px;margin:10px 0;color:#333;}
-			a {font-size:12px;text-decoration:none;color:#f00;}
-			p span {color:#00f;}
-			#container {width:960px;margin:0 auto;padding-bottom:40px;}
-			#examples {margin-top:60px;}
-			pre {font-family:"Courier New", Courier, monospace;font-size:11px;margin:20px 0 100px 0;border:1px dashed #ddd;padding:10px;background:#f6f6f6;}
-			pre.html {margin:10px 0;}
-			.clear {clear:both;}
-		</style>
+		<script src="../js/jquery.zaccordion.js"></script>
+		<link rel="stylesheet" type="text/css" href="examples.css"/>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("pre.js").each(function(index) {
@@ -43,19 +28,19 @@
 			<h2>Example 1 - A Basic Accordion</h2>
 			<ul id="example1">
 				<li>
-					<img src="images/slide0.gif" width="600" height="270" alt="" />
+					<img src="../images/slide0.gif" width="600" height="270" alt="" />
 				</li>
 				<li>
-					<img src="images/slide1.gif" width="600" height="270" alt="" />
+					<img src="../images/slide1.gif" width="600" height="270" alt="" />
 				</li>
 				<li>
-					<img src="images/slide2.gif" width="600" height="270" alt="" />
+					<img src="../images/slide2.gif" width="600" height="270" alt="" />
 				</li>
 				<li>
-					<img src="images/slide3.gif" width="600" height="270" alt="" />
+					<img src="../images/slide3.gif" width="600" height="270" alt="" />
 				</li>
 				<li>
-					<img src="images/slide4.gif" width="600" height="270" alt="" />
+					<img src="../images/slide4.gif" width="600" height="270" alt="" />
 				</li>
 			</ul>
 			<p>This example demonstrates the best way to fire the accordion. Each slide contains an image measuring 600 x 270 pixels. The <strong>width</strong> of the accordion is required and set to <em>960</em>. The <strong>slideWidth</strong> is set to <em>600</em> in order to display the full slide. The size of the tabs will be calculated automatically.</p>
@@ -76,13 +61,13 @@ $("#example1").zAccordion({
 			<h2>Example 2 - Percentages</h2>
 			<div id="example2">
 				<div>
-					<img src="images/slide0.gif" width="100%" height="100%" alt="" />
+					<img src="../images/slide0.gif" width="100%" height="100%" alt="" />
 				</div>
 				<div>
-					<img src="images/slide1.gif" width="100%" height="100%" alt="" />
+					<img src="../images/slide1.gif" width="100%" height="100%" alt="" />
 				</div>
 				<div>
-					<img src="images/slide2.gif" width="100%" height="100%" alt="" />
+					<img src="../images/slide2.gif" width="100%" height="100%" alt="" />
 				</div>
 			</div>
 			<p>The example above shows how to use percentages. The <strong>width</strong> of the accordion is set to <em>100%</em> (in quotes below) and the <strong>tabWidth</strong> to <em>10%</em>. The size of the slides will be calculated automatically.</p>
@@ -112,11 +97,11 @@ $("#example2").zAccordion({
 				#stop {float:left;}
 			</style>
 			<ul id="example3">
-				<li><img src="images/slide0.gif" width="600" height="200" /></li>
-				<li><img src="images/slide1.gif" width="600" height="200" /></li>
-				<li><img src="images/slide2.gif" width="600" height="200" /></li>
-				<li><img src="images/slide3.gif" width="600" height="200" /></li>
-				<li><img src="images/slide4.gif" width="600" height="200" /></li>
+				<li><img src="../images/slide0.gif" width="600" height="200" /></li>
+				<li><img src="../images/slide1.gif" width="600" height="200" /></li>
+				<li><img src="../images/slide2.gif" width="600" height="200" /></li>
+				<li><img src="../images/slide3.gif" width="600" height="200" /></li>
+				<li><img src="../images/slide4.gif" width="600" height="200" /></li>
 			</ul>
 			<p>
 				<a id="start" href="#">Start</a>
@@ -165,10 +150,10 @@ $("#thumbs a").click(function() {
 				#example4 ul {list-style:none;}
 				#example4 h3 {color:#fff;text-transform:uppercase;font-size:24px;line-height:1;}
 				#example4 p {color:#fff;}
-				#example4 .frame-0 {background:url(images/slide0.gif) top left repeat;}
-				#example4 .frame-1 {background:url(images/slide1.gif) top left repeat;}
-				#example4 .frame-2 {background:url(images/slide2.gif) top left repeat;}
-				#example4 .frame-3 {background:url(images/slide3.gif) top left repeat;}
+				#example4 .frame-0 {background:url(../images/slide0.gif) top left repeat;}
+				#example4 .frame-1 {background:url(../images/slide1.gif) top left repeat;}
+				#example4 .frame-2 {background:url(../images/slide2.gif) top left repeat;}
+				#example4 .frame-3 {background:url(../images/slide3.gif) top left repeat;}
 				#example4 .frame-content {width:400px;padding:50px;}
 				#example4 .frame-closed .frame-content {display:none;}
 				#example4 .frame-open .frame-content {display:block;}
@@ -221,10 +206,10 @@ $(document).ready(function() {
 
 			<h2>Example 5 - Using the HTML5 Data Attribute</h2>
 			<div id="example5" data-width="900" data-slidewidth="500" data-height="250">
-				<img src="images/slide0.gif" width="500" height="250" alt="" />
-				<img src="images/slide1.gif" width="500" height="250" alt="" />
-				<img src="images/slide2.gif" width="500" height="250" alt="" />
-				<img src="images/slide3.gif" width="500" height="250" alt="" />
+				<img src="../images/slide0.gif" width="500" height="250" alt="" />
+				<img src="../images/slide1.gif" width="500" height="250" alt="" />
+				<img src="../images/slide2.gif" width="500" height="250" alt="" />
+				<img src="../images/slide3.gif" width="500" height="250" alt="" />
 			</div>
 			<p>HTML5 gave web developers the ability to add custom data attributes to HTML elements. Instead of defining options with JavaScript, zAccordion can pull its options from data attributes. A simple example is below. The <strong>width</strong>, <strong>slideWidth</strong>*, and <strong>height</strong> are prefixed with <em>data-</em>.</p>
 			<small>* Note: Notice the lowercase <strong>slidewidth</strong>. In order to match HTML5 specs, the data attributes should be defined as lowercase instead of camelcase with JavaScript.</small>
@@ -248,11 +233,11 @@ $(document).ready(function() {
 				#example6 img {float:left;display:block;}
 			</style>
 			<ul id="example6">
-				<li><img src="images/slide0.gif" width="320" height="100" alt="" /></li>
-				<li><img src="images/slide1.gif" width="320" height="100" alt="" /></li>
-				<li><img src="images/slide2.gif" width="320" height="100" alt="" /></li>
-				<li><img src="images/slide3.gif" width="320" height="100" alt="" /></li>
-				<li><img src="images/slide4.gif" width="320" height="100" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="320" height="100" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="320" height="100" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="320" height="100" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="320" height="100" alt="" /></li>
+				<li><img src="../images/slide4.gif" width="320" height="100" alt="" /></li>
 			</ul>
 			<div class="clear"></div>
 			<p>
@@ -312,10 +297,10 @@ $(document).ready(function() {
 
 			<h2>Example 7 - Maximum Tab Width</h2>
 			<ul id="example7">
-				<li><img src="images/slide0.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="600" height="150" alt="" /></li>
 			</ul>
 			<div class="clear"></div>
 			<p>The example demonstrates how to set up zAccordion using <strong>width</strong> and <strong>tabWidth</strong>. The accordion has a width of 800 pixels. The <strong>tabWidth</strong> will need to be set to less than <em>200</em> pixels. Anything over <em>200</em> and the accordion will not build. It is best to set the <strong>tabWidth</strong> to less than <em>200</em> pixels in this example so the slides will be free to animate.</p>
@@ -335,10 +320,10 @@ $(document).ready(function() {
 
 			<h2>Example 8 - Minimum Slide Width</h2>
 			<ul id="example8">
-				<li><img src="images/slide0.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="600" height="150" alt="" /></li>
 			</ul>
 			<p>This is example is similar to the example above, but this time <strong>slideWidth</strong> is set to <em>200</em> pixels. <strong>slideWidth</strong> should really be set to higher than <em>200</em> to allow for some animation.</p>
 <pre class="js">
@@ -360,27 +345,31 @@ $(document).ready(function() {
 				#animation span {color:#}
 			</style>
 			<ol id="example9">
-				<li><img src="images/slide0.gif" width="100%" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="100%" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="100%" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="100%" height="150" alt="" /></li>
-				<li><img src="images/slide4.gif" width="100%" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="100%" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="100%" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="100%" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="100%" height="150" alt="" /></li>
+				<li><img src="../images/slide4.gif" width="100%" height="150" alt="" /></li>
 			</ol>
 			<p id="animation"><span></span></p>
 			<p>This example shows how to fire an event when slide animation starts and when it is complete. The <strong>timeout</strong> is increased to 8 seconds in the snippet below in order to see the how the <strong>animationStart</strong> and <strong>animationComplete</strong> options work.</p>
 <pre class="js">
-$(document).ready(function() {
+$(document).ready(function () {
 	$("#example9").zAccordion({
 		timeout: 8000,
 		speed: 5000,
 		tabWidth: "10%",
 		width: "100%",
 		height: "150",
-		animationStart: function () {
+		animationStart: function (animated) {
 			$("#animation span").html("Animation started...");
+			console.log('In `animationStart()`, `this` =', "\n", this);
+			console.log('In `animationStart()`, `animated` =', "\n", animated);
 		},
-		animationComplete: function () {
+		animationComplete: function (animated) {
 			$("#animation span").html("Animation complete.");
+			console.log('In `animationComplete()`, `this` =', "\n", this);
+			console.log('In `animationComplete()`, `animated` =', "\n", animated);
 		}
 	});
 });
@@ -403,7 +392,7 @@ $(document).ready(function() {
 			</style>
 			<ul id="example10">
 				<li>
-					<img src="images/slide0.gif" width="600" height="400" alt="" />
+					<img src="../images/slide0.gif" width="600" height="400" alt="" />
 					<div class="slider-bg"></div>
 					<div class="slider-info">
 						<strong>Lorem ipsum</strong>
@@ -411,7 +400,7 @@ $(document).ready(function() {
 					</div>
 				</li>
 				<li>
-					<img src="images/slide1.gif" width="600" height="400" alt="" />
+					<img src="../images/slide1.gif" width="600" height="400" alt="" />
 					<div class="slider-bg"></div>
 					<div class="slider-info">
 						<strong>Dolor Sit</strong>
@@ -419,7 +408,7 @@ $(document).ready(function() {
 					</div>
 				</li>
 				<li>
-					<img src="images/slide2.gif" width="600" height="400" alt="" />
+					<img src="../images/slide2.gif" width="600" height="400" alt="" />
 					<div class="slider-bg"></div>
 					<div class="slider-info">
 						<strong>Donec Ultrices</strong>
@@ -427,7 +416,7 @@ $(document).ready(function() {
 					</div>
 				</li>
 				<li>
-					<img src="images/slide3.gif" width="600" height="400" alt="" />
+					<img src="../images/slide3.gif" width="600" height="400" alt="" />
 					<div class="slider-bg"></div>
 					<div class="slider-info">
 						<strong>Est Imper</strong>
@@ -454,11 +443,11 @@ $(document).ready(function() {
 
 			<h2>Example 11 - Easing</h2>
 			<ol id="example11">
-				<li><img src="images/slide0.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="600" height="150" alt="" /></li>
-				<li><img src="images/slide4.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="600" height="150" alt="" /></li>
+				<li><img src="../images/slide4.gif" width="600" height="150" alt="" /></li>
 			</ol>
 			<p>This example shows a quick way to add <strong>easing</strong> to the accordion using the jQuery Easing Plugin.</p>
 <pre class="js">
@@ -478,20 +467,21 @@ $(document).ready(function() {
 
 			<h2>Example 12 - Firing a Function using afterBuild</h2>
 			<ol id="example12">
-				<li><img src="images/slide0.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="700" height="150" alt="" /></li>
 			</ol>
 			<p id="build"><span></span></p>
 			<p>The <strong>afterBuild</strong> option can be set up to fire a function once the accordion is built. Below, the <strong>afterBuild</strong> option will change the text of an <em>id</em>. As a practical example, this option could be used to set the accordion's CSS position from off screen to on screen, hiding the initial build and showing the accordion only when it is ready.</p>
 <pre class="js">
-$(document).ready(function() {
+$(document).ready(function () {
 	$("#example12").zAccordion({
 		height: "150",
 		slideWidth: "700",
 		width: "960",
 		buildComplete: function () {
+			console.log('In `buildComplete()`, `this` =', "\n", this);
 			$("#build span").html("Build complete.");
 		}
 	});
@@ -504,10 +494,10 @@ $(document).ready(function() {
 
 			<h2>Example 13 - Using Error Messaging</h2>
 			<ul id="example13">
-				<li><img src="images/slide0.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide1.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide2.gif" width="700" height="150" alt="" /></li>
-				<li><img src="images/slide3.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide0.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide1.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide2.gif" width="700" height="150" alt="" /></li>
+				<li><img src="../images/slide3.gif" width="700" height="150" alt="" /></li>
 			</ul>
 			<p>In Example 7 the <strong>tabWidth</strong> was set to 200 pixels, or one fourth of the accordion's <strong>width</strong>. This example sets the <strong>tabWidth</strong> to 300 pixels. The accordion should throw an error in the JavaScript console and not build. The <strong>errors</strong> option is set to <em>true</em>.</p>
 <pre class="js">

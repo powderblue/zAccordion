@@ -9,9 +9,7 @@
     ],
     "ignore": [
         "README",
-        "examples.html",
-        "percentage.html",
-        "responsive.html",
+        "examples",
         "images"
     ],
     "dependencies": {
