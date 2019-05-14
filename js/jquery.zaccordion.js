@@ -89,11 +89,11 @@
 						o.slideWidthUnits = o.widthUnits;
 						o.tabWidthUnits = o.widthUnits;
 						if (o.widthUnits === "%") { /* Percentages. */
-							o.tabWidth = 100 / (t.children().size() + 1); /* Use 100% instead of the defined width. */
-							o.slideWidth = 100 - ((t.children().size() - 1) * o.tabWidth);
+							o.tabWidth = 100 / (t.children().length + 1); /* Use 100% instead of the defined width. */
+							o.slideWidth = 100 - ((t.children().length - 1) * o.tabWidth);
 						} else { /* Pixels. */
-							o.tabWidth = o.width / (t.children().size() + 1);
-							o.slideWidth = o.width - ((t.children().size() - 1) * o.tabWidth);
+							o.tabWidth = o.width / (t.children().length + 1);
+							o.slideWidth = o.width - ((t.children().length - 1) * o.tabWidth);
 						}
 						return true;
 					}
@@ -114,16 +114,16 @@
 					} else if ((o.width > 100) && (o.widthUnits === "%")) {
 						helpers.displayError("width cannot be over 100%", o.errors);
 						return false;
-					} else if ((((t.children().size() * o.tabWidth) > 100) && (o.widthUnits === "%")) || (((t.children().size() * o.tabWidth) > o.width) && (o.widthUnits === "px"))) {
+					} else if ((((t.children().length * o.tabWidth) > 100) && (o.widthUnits === "%")) || (((t.children().length * o.tabWidth) > o.width) && (o.widthUnits === "px"))) {
 						helpers.displayError("tabWidth too large for accordion", o.errors);
 						return false;
 					} else {
 						/* Need to define the remaining slideWidth */
 						o.slideWidthUnits = o.widthUnits; /* Set the units to be consistent */
 						if (o.widthUnits === "%") { /* Percentages */
-							o.slideWidth = 100 - ((t.children().size() - 1) * o.tabWidth); /* Use 100% instead of the defined width */
+							o.slideWidth = 100 - ((t.children().length - 1) * o.tabWidth); /* Use 100% instead of the defined width */
 						} else { /* Pixels */
-							o.slideWidth = o.width - ((t.children().size() - 1) * o.tabWidth);
+							o.slideWidth = o.width - ((t.children().length - 1) * o.tabWidth);
 						}
 						return true;
 					}
@@ -139,16 +139,16 @@
 					} else if (o.slideWidth >= o.width) {
 						helpers.displayError("slideWidth cannot be greater than or equal to width", o.errors);
 						return false;
-					} else if ((((t.children().size() * o.slideWidth) < 100) && (o.widthUnits === "%")) || (((t.children().size() * o.slideWidth) < o.width) && (o.widthUnits === "px"))) { /* Prevents gaps in the accordion. For example, a slider with 4 slides at 150 pixels wide. 4 * 150 = 600. Needs to fill an 800px space. */
+					} else if ((((t.children().length * o.slideWidth) < 100) && (o.widthUnits === "%")) || (((t.children().length * o.slideWidth) < o.width) && (o.widthUnits === "px"))) { /* Prevents gaps in the accordion. For example, a slider with 4 slides at 150 pixels wide. 4 * 150 = 600. Needs to fill an 800px space. */
 						helpers.displayError("slideWidth too small for accordion", o.errors);
 						return false;
 					} else {
 						/* Need to define the remaining tabWidth. */
 						o.tabWidthUnits = o.widthUnits; /* Set the units to be consistent. */
 						if (o.widthUnits === "%") { /* Percentages. */
-							o.tabWidth = (100 - o.slideWidth) / (t.children().size() - 1); /* Use 100% instead of the defined width. */
+							o.tabWidth = (100 - o.slideWidth) / (t.children().length - 1); /* Use 100% instead of the defined width. */
 						} else { /* Pixels. */
-							o.tabWidth = (o.width - o.slideWidth) / (t.children().size() - 1);
+							o.tabWidth = (o.width - o.slideWidth) / (t.children().length - 1);
 						}
 						return true;
 					}
@@ -232,7 +232,7 @@
 							animate = o.slideWidth - o.tabWidth; /* Number of pixels yet do be displayed on a hidden slide. */
 							tag = obj.get(0).tagName; /* Tag type of the container. */
 							childtag = obj.children().get(0).tagName; /* Tag type of the children. */
-							size = obj.children().size(); /* Number of children. */
+							size = obj.children().length; /* Number of children. */
 							obj.data($.extend({}, {
 								auto: o.auto,
 								interval: null,
@@ -431,7 +431,7 @@
 			},
 			trigger: function (x) {
 				x = parseInt(x, 10);
-				if ((x >= $(this).children().size()) || (x < 0)) { /* If the triggered slide is out of range, trigger the first slide. */
+				if ((x >= $(this).children().length) || (x < 0)) { /* If the triggered slide is out of range, trigger the first slide. */
 					x = 0;
 				}
 				x += 1; /* Use nth-child to trigger slide. */
